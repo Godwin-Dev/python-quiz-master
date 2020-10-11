@@ -22,26 +22,28 @@ Responses
 8 - Quiz over
 '''
 
+# Getting the device IP address
+hostname = socket.gethostname()
+ip_address = socket.gethostbyname(hostname)
+server_address = ip_address
+print(f'Server Address: {server_address}')
+
 while True:
     try:
         number_of_teams = int(input("Maximum number of teams >>> "))
         break
     except :
         print("Give a valid number")
+
 teams = []
 current_question = None
 ready_to_start = Event()
+wait_for_answers = Event()
 
 answered = 0
 scores = {}
 lives = {}
-
-wait_for_answers = Event()
-hostname = socket.gethostname()
-ip_address = socket.gethostbyname(hostname)
-server_address = ip_address
-print(f'Server Address: {server_address}')
-    
+ 
 Question = namedtuple('Question', ['q','options', 'answer'])
 
 quiz_questions = [

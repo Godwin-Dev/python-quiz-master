@@ -64,29 +64,36 @@ while playing:
             print(f"Welcome team {team_name}")
             print("You have ⭐ ⭐ ⭐  lives")
             send_binary(client_socket,["STAT",""])
+
         elif response[0] == 2:
             print("OOPS! Connection failed")
             playing = False
             break
+
         elif response[0] == 3:
             print(response[1])
             send_binary(client_socket,["QUES",""])
+
         elif response[0] == 4:
             printQuestion(response[1])
             answer = input("Your answer >>> ")
             send_binary(client_socket,["ANSW",answer])
+
         elif response[0] == 5:
             print("CONGRATS! It's a right answer")
             print("Your score is " + str(response[1]))
             send_binary(client_socket,["STAT",""])
+
         elif response[0] == 6:
             no_of_lives = '⭐ '*response[1] if response[1] > 0 else "0 lives"
             print("OOPS! It's a wrong answer")
             print(f"You have {no_of_lives} left")
             send_binary(client_socket,["STAT",""])
+
         elif response[0] == 7:
             print("Your next question....")
             send_binary(client_socket,["QUES",""])
+            
         elif response[0] == 8:
             print(response[1])
             playing = False
