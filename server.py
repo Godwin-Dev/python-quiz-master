@@ -68,6 +68,7 @@ class QuizGame(socketserver.BaseRequestHandler):
         #Retrieve Command
         global teams, answered, current_question, scores
         for command in get_binary(self.request):
+            team_name = ""
             if command[0] == "JOIN":
                 team_name = command[1]
                 if team_name == "":
